@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ben OUATTARA — Data Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0a0f;
+  --paper: #f5f0e8;
+  --cream: #ede8dc;
+  --accent: #c8522a;
+  --accent2: #2a6bc8;
+  --accent3: #2ab87a;
+  --gold: #c8a42a;
+  --border: #d4cfc3;
+  --muted: #8c8578;
+  --mono: 'DM Mono', monospace;
+  --serif: 'Fraunces', serif;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--mono);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── Cursor */
+.cur {position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s,background .2s;mix-blend-mode:multiply}
+.cur-r {position:fixed;width:36px;height:36px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,opacity .3s;opacity:.5}
+body:hover .cur{opacity:1}
+
+/* ── NAV */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem 3rem;
+  background:rgba(245,240,232,.93);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-name{font-family:var(--serif);font-size:1.1rem;font-weight:900;letter-spacing:-.02em;color:var(--ink)}
+.nav-name span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+
+/* ── HERO */
+.hero {
+  min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 3rem 5rem;
+  position:relative;overflow:hidden;
+}
+.hero-bg-text {
+  position:absolute;top:-2%;left:-2%;
+  font-family:var(--serif);font-size:clamp(12rem,22vw,22rem);font-weight:900;
+  color:transparent;-webkit-text-stroke:1px rgba(10,10,15,.06);
+  line-height:.85;user-select:none;pointer-events:none;white-space:nowrap;
+  animation:bgdrift 20s ease-in-out infinite alternate;
+}
+@keyframes bgdrift{from{transform:translate(-1%,0)}to{transform:translate(1%,-1%)}}
+
+.hero-line {
+  width:60px;height:2px;background:var(--accent);margin-bottom:2rem;
+  animation:widthIn 1s ease forwards;
+}
+@keyframes widthIn{from{width:0}to{width:60px}}
+
+.hero-tag{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem}
+.hero h1 {
+  font-family:var(--serif);font-size:clamp(3.5rem,7vw,7rem);font-weight:900;
+  line-height:.95;letter-spacing:-.04em;margin-bottom:1.5rem;
+}
+.hero h1 em{font-style:italic;color:var(--accent)}
+
+.hero-bio {
+  font-size:.8rem;line-height:1.9;color:var(--muted);
+  max-width:520px;margin-bottom:3rem;
+}
+
+.hero-chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:3.5rem}
+.chip {
+  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.35rem .9rem;border:1px solid var(--border);color:var(--muted);
+  transition:all .2s;
+}
+.chip:hover,.chip.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+.hero-links{display:flex;gap:1rem;flex-wrap:wrap}
+.btn {
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.85rem 2rem;font-family:var(--mono);font-size:.7rem;
+  letter-spacing:.12em;text-transform:uppercase;text-decoration:none;
+  border:none;cursor:none;transition:all .25s;
+}
+.btn-dark{background:var(--ink);color:var(--paper)}
+.btn-dark:hover{background:var(--accent);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--ink);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--ink);transform:translateY(-2px)}
+
+.hero-scroll {
+  position:absolute;right:3rem;bottom:3rem;
+  display:flex;flex-direction:column;align-items:center;gap:.8rem;
+  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+}
+.scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--muted),transparent);animation:scrollline 2s ease-in-out infinite}
+@keyframes scrollline{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(.5);opacity:.4}}
+
+/* ── SECTION BASE */
+section{padding:7rem 3rem;position:relative}
+
+.s-label {
+  font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);
+  margin-bottom:.8rem;display:flex;align-items:center;gap:.8rem;
+}
+.s-label::before{content:attr(data-n);display:inline-block;width:22px;height:22px;background:var(--accent);color:var(--paper);display:flex;align-items:center;justify-content:center;font-size:.55rem;flex-shrink:0}
+
+.s-title {
+  font-family:var(--serif);font-size:clamp(2rem,4vw,3.5rem);font-weight:900;
+  letter-spacing:-.03em;line-height:1;margin-bottom:1rem;
+}
+.s-sub {
+  font-size:.78rem;line-height:1.9;color:var(--muted);
+  max-width:580px;margin-bottom:4rem;
+}
+
+/* ── PROJECTS */
+.projects-list{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+
+.project-card {
+  background:var(--paper);
+  display:grid;grid-template-columns:80px 1fr auto;
+  align-items:stretch;
+  border:none;
+  transition:background .25s;
+  overflow:hidden;
+}
+.project-card:hover{background:var(--cream)}
+
+.proj-num {
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:2.5rem;font-weight:900;
+  color:var(--border);border-right:1px solid var(--border);
+  padding:2.5rem 1.5rem;
+  transition:color .25s;
+}
+.project-card:hover .proj-num{color:var(--accent)}
+
+.proj-body{padding:2.5rem;display:flex;flex-direction:column;gap:.8rem}
+
+.proj-type {
+  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  padding:.25rem .7rem;display:inline-block;width:fit-content;
+}
+.type-py{background:rgba(200,82,42,.1);color:var(--accent)}
+.type-sql{background:rgba(42,107,200,.1);color:var(--accent2)}
+.type-bi{background:rgba(200,164,42,.1);color:var(--gold)}
+
+.proj-title {
+  font-family:var(--serif);font-size:1.6rem;font-weight:700;
+  letter-spacing:-.02em;line-height:1.1;
+}
+.proj-desc{font-size:.75rem;line-height:1.8;color:var(--muted);max-width:600px}
+
+.proj-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.4rem}
+.ptag {
+  font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.2rem .6rem;border:1px solid var(--border);color:var(--muted);
+}
+
+.proj-arrow {
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem 2.5rem;border-left:1px solid var(--border);
+  font-size:1.5rem;color:var(--border);
+  transition:all .25s;cursor:none;
+}
+.project-card:hover .proj-arrow{color:var(--accent);transform:rotate(45deg)}
+
+/* ── DETAIL SECTIONS */
+.detail-section{background:var(--cream);border-top:1px solid var(--border)}
+.detail-inner{max-width:1200px;margin:0 auto}
+
+.detail-header{
+  display:grid;grid-template-columns:1fr auto;align-items:start;
+  margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border);
+}
+.detail-kpis{display:flex;gap:3rem;margin-top:2rem}
+.kpi-val{font-family:var(--serif);font-size:2.5rem;font-weight:900;line-height:1;color:var(--accent)}
+.kpi-label{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
+
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem}
+
+/* Code viewer */
+.code-viewer {
+  background:var(--ink);border:1px solid rgba(255,255,255,.07);
+  overflow:hidden;
+}
+.code-viewer.full-width{grid-column:1/-1}
+
+.cv-tabs {
+  display:flex;border-bottom:1px solid rgba(255,255,255,.08);
+  overflow-x:auto;
+}
+.cv-tab {
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;
+  padding:.7rem 1.2rem;color:rgba(255,255,255,.35);
+  cursor:none;border:none;background:none;white-space:nowrap;
+  transition:all .2s;border-bottom:2px solid transparent;
+  text-transform:uppercase;
+}
+.cv-tab.active,.cv-tab:hover{color:rgba(255,255,255,.9);border-bottom-color:var(--accent)}
+
+.cv-header {
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.03);
+}
+.cv-dots{display:flex;gap:.4rem}
+.cv-dot{width:9px;height:9px;border-radius:50%}
+.cv-dot-r{background:#ff5f56}.cv-dot-y{background:#ffbd2e}.cv-dot-g{background:#27c93f}
+.cv-fname{font-size:.62rem;color:rgba(255,255,255,.3);letter-spacing:.1em}
+
+.cv-body {
+  padding:1.5rem;overflow-x:auto;
+  font-size:.72rem;line-height:1.85;max-height:380px;overflow-y:auto;
+}
+.cv-body::-webkit-scrollbar{width:4px;height:4px}
+.cv-body::-webkit-scrollbar-track{background:transparent}
+.cv-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+
+.cv-body pre{color:#c9d1d9;white-space:pre-wrap;word-break:break-word}
+/* Syntax colors */
+.kw{color:#79c0ff}.fn{color:#a8ff3e}.str{color:#ffa657}.cm{color:#3a5068;font-style:italic}
+.num{color:#ffd700}.cl{color:#00e5ff}.op{color:#adbac7}.kw2{color:#f778ba}
+.ln{color:#2a3a4a;user-select:none;margin-right:1.2rem;min-width:28px;display:inline-block;text-align:right}
+
+/* Info card */
+.info-card {
+  background:var(--paper);border:1px solid var(--border);
+  padding:2rem;
+}
+.ic-title{font-family:var(--serif);font-size:1.1rem;font-weight:700;margin-bottom:1.2rem}
+.ic-list{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.ic-list li{font-size:.73rem;line-height:1.7;color:var(--muted);display:flex;align-items:flex-start;gap:.7rem}
+.ic-list li::before{content:'→';color:var(--accent);flex-shrink:0;margin-top:1px}
+
+.metrics-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-bottom:2rem}
+.met-cell{background:var(--paper);padding:1.5rem;text-align:center}
+.met-val{font-family:var(--serif);font-size:2rem;font-weight:900;color:var(--ink)}
+.met-label{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
+
+/* ── SQL project specifics */
+.sql-schema {
+  background:var(--ink);padding:1.5rem;overflow-x:auto;
+  font-size:.68rem;line-height:1.7;
+}
+.sql-schema pre{color:#c9d1d9;white-space:pre-wrap}
+
+/* ── SKILLS */
+.skills-section{background:var(--ink);color:var(--paper)}
+.skills-section .s-label{color:var(--accent)}
+.skills-section .s-title{color:var(--paper)}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.08)}
+.skill-block{background:var(--ink);padding:2.5rem 2rem;transition:background .25s}
+.skill-block:hover{background:#111}
+.skill-cat{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.skill-items{display:flex;flex-wrap:wrap;gap:.5rem}
+.sk-item{font-size:.68rem;padding:.3rem .8rem;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);transition:all .2s}
+.sk-item:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── CONTACT */
+.contact-section{background:var(--paper)}
+.contact-inner {
+  max-width:800px;margin:0 auto;text-align:center;
+  padding:4rem 0;
+}
+.contact-big {
+  font-family:var(--serif);font-size:clamp(3rem,7vw,6rem);
+  font-weight:900;letter-spacing:-.04em;line-height:.95;
+  margin-bottom:2rem;
+}
+.contact-big em{font-style:italic;color:var(--accent)}
+.contact-email {
+  display:inline-block;font-size:.85rem;letter-spacing:.08em;
+  color:var(--ink);text-decoration:none;border-bottom:2px solid var(--accent);
+  padding-bottom:2px;margin-bottom:2.5rem;transition:color .2s;
+}
+.contact-email:hover{color:var(--accent)}
+.contact-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+
+/* ── FOOTER */
+footer {
+  padding:1.5rem 3rem;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+}
+
+/* ── FADE IN */
+.fi{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.fi.vis{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ── DIVIDER */
+.divider{height:1px;background:var(--border);margin:0 3rem}
+
+/* ── Responsive */
+@media(max-width:900px){
+  .detail-grid{grid-template-columns:1fr}
+  .metrics-row{grid-template-columns:repeat(2,1fr)}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .project-card{grid-template-columns:50px 1fr auto}
+  .proj-num{font-size:1.5rem;padding:1.5rem .8rem}
+}
+@media(max-width:600px){
+  nav{padding:.8rem 1.5rem}
+  .nav-links{display:none}
+  section{padding:5rem 1.5rem}
+  .hero{padding:0 1.5rem 4rem}
+  .detail-kpis{flex-wrap:wrap;gap:1.5rem}
+  .skills-grid{grid-template-columns:1fr}
+  .project-card{grid-template-columns:1fr}
+  .proj-num,.proj-arrow{display:none}
+  footer{flex-direction:column;gap:.5rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-r" id="curR"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-name">Ben <span>OUATTARA</span></div>
+  <ul class="nav-links">
+    <li><a href="#projects">Projets</a></li>
+    <li><a href="#auto">Automobile</a></li>
+    <li><a href="#hospital">Hôpital</a></li>
+    <li><a href="#bi">Power BI</a></li>
+    <li><a href="#skills">Compétences</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg-text">DATA</div>
+  <div class="hero-line"></div>
+  <div class="hero-tag">Data Analyst · Python · SQL · Power BI</div>
+  <h1>Ben<br><em>OUATTARA</em></h1>
+  <p class="hero-bio">
+    Passionné par la donnée, je conçois des pipelines d'analyse, des modèles prédictifs 
+    et des dashboards qui transforment des données brutes en décisions stratégiques. 
+    3 projets aboutis · code open-source sur GitHub.
+  </p>
+  <div class="hero-chips">
+    <span class="chip active">Python</span>
+    <span class="chip">Machine Learning</span>
+    <span class="chip">SQL</span>
+    <span class="chip">Power BI</span>
+    <span class="chip">Visualisation</span>
+    <span class="chip">Analyse financière</span>
+  </div>
+  <div class="hero-links">
+    <a href="#projects" class="btn btn-dark">↓ Voir les projets</a>
+    <a href="https://github.com/Benouattara" target="_blank" class="btn btn-outline">↗ GitHub</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- PROJECTS INDEX -->
+<section id="projects">
+  <div class="s-label" data-n="00">Index</div>
+  <h2 class="s-title">Projets</h2>
+  <p class="s-sub">Trois projets complets — données, analyses, code et résultats consultables directement ci-dessous.</p>
+
+  <div class="projects-list fi">
+    <div class="project-card" onclick="document.getElementById('auto').scrollIntoView({behavior:'smooth'})">
+      <div class="proj-num">01</div>
+      <div class="proj-body">
+        <span class="proj-type type-py">Python · Jupyter</span>
+        <div class="proj-title">Analyse du Marché Automobile Européen</div>
+        <div class="proj-desc">50 000 véhicules générés, analyse exploratoire avancée, 5 modèles ML comparés, clustering de marché. Stack complète Python data science.</div>
+        <div class="proj-tags">
+          <span class="ptag">Pandas</span><span class="ptag">XGBoost</span>
+          <span class="ptag">Plotly</span><span class="ptag">Scikit-learn</span>
+          <span class="ptag">K-Means</span><span class="ptag">R² 0.92</span>
+        </div>
+      </div>
+      <div class="proj-arrow">→</div>
+    </div>
+
+    <div class="project-card" onclick="document.getElementById('hospital').scrollIntoView({behavior:'smooth'})">
+      <div class="proj-num">02</div>
+      <div class="proj-body">
+        <span class="proj-type type-sql">SQL · MySQL</span>
+        <div class="proj-title">Analyse des Opérations Hospitalières</div>
+        <div class="proj-desc">Base de données MySQL complète (6 tables), KPIs patients, activité hospitalière, performance des services et analyse financière avec requêtes optimisées.</div>
+        <div class="proj-tags">
+          <span class="ptag">MySQL</span><span class="ptag">Jointures</span>
+          <span class="ptag">Agrégations</span><span class="ptag">KPIs</span>
+          <span class="ptag">Finance</span><span class="ptag">RH</span>
+        </div>
+      </div>
+      <div class="proj-arrow">→</div>
+    </div>
+
+    <div class="project-card" onclick="document.getElementById('bi').scrollIntoView({behavior:'smooth'})">
+      <div class="proj-num">03</div>
+      <div class="proj-body">
+        <span class="proj-type type-bi">Power BI · DAX</span>
+        <div class="proj-title">Dashboard Financier Hospitalier</div>
+        <div class="proj-desc">Rapport Power BI interactif pour le pilotage financier d'un hôpital : revenus, coûts, taux d'impayés, performance par département. Visualisations dynamiques.</div>
+        <div class="proj-tags">
+          <span class="ptag">Power BI</span><span class="ptag">DAX</span>
+          <span class="ptag">Dashboard</span><span class="ptag">Finance</span>
+          <span class="ptag">KPIs</span><span class="ptag">Interactif</span>
+        </div>
+      </div>
+      <div class="proj-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════ PROJET 01 ══════════════════════════════════ -->
+<section id="auto" class="detail-section">
+  <div class="detail-inner">
+    <div class="s-label" data-n="01">Python · Jupyter · ML</div>
+    <h2 class="s-title fi">Marché Automobile<br>Européen</h2>
+
+    <div class="detail-header fi">
+      <div>
+        <p class="s-sub" style="margin-bottom:1.5rem">
+          Analyse de bout en bout sur 50 000 véhicules — génération de données, exploration statistique, 
+          machine learning supervisé et non supervisé. 3 notebooks, 5 modèles comparés.
+        </p>
+        <div class="detail-kpis">
+          <div><div class="kpi-val">50K</div><div class="kpi-label">Véhicules</div></div>
+          <div><div class="kpi-val">0.92</div><div class="kpi-label">R² XGBoost</div></div>
+          <div><div class="kpi-val">87.5%</div><div class="kpi-label">Accuracy</div></div>
+          <div><div class="kpi-val">5</div><div class="kpi-label">Clusters</div></div>
+          <div><div class="kpi-val">−28%</div><div class="kpi-label">CO₂ 2015→2024</div></div>
+        </div>
+      </div>
+      <a href="https://github.com/Benouattara" target="_blank" class="btn btn-dark" style="align-self:flex-start">↗ GitHub</a>
+    </div>
+
+    <div class="metrics-row fi">
+      <div class="met-cell"><div class="met-val">15</div><div class="met-label">Marques</div></div>
+      <div class="met-cell"><div class="met-val">8</div><div class="met-label">Pays EU</div></div>
+      <div class="met-cell"><div class="met-val">5</div><div class="met-label">Modèles ML</div></div>
+      <div class="met-cell"><div class="met-val">17</div><div class="met-label">Variables</div></div>
+    </div>
+
+    <!-- CODE VIEWER P01 -->
+    <div class="code-viewer full-width fi" style="margin-bottom:1.5rem">
+      <div class="cv-tabs" id="auto-tabs">
+        <button class="cv-tab active" onclick="showCode('auto','gen')">01 — Data Generation</button>
+        <button class="cv-tab" onclick="showCode('auto','eda')">02 — Exploration</button>
+        <button class="cv-tab" onclick="showCode('auto','ml')">03 — Machine Learning</button>
+        <button class="cv-tab" onclick="showCode('auto','proc')">data_processing.py</button>
+      </div>
+      <div class="cv-header">
+        <div class="cv-dots"><div class="cv-dot cv-dot-r"></div><div class="cv-dot cv-dot-y"></div><div class="cv-dot cv-dot-g"></div></div>
+        <span class="cv-fname" id="auto-fname">01_data_generation.ipynb</span>
+      </div>
+      <div class="cv-body" id="auto-code"></div>
+    </div>
+
+    <div class="detail-grid fi">
+      <div class="info-card">
+        <div class="ic-title">Notebook 01 · Génération des données</div>
+        <ul class="ic-list">
+          <li>50 000 véhicules générés avec distributions réalistes</li>
+          <li>15 marques européennes · 100+ modèles différents</li>
+          <li>Cohérence prix / puissance / consommation / CO₂</li>
+          <li>Distribution temporelle évolutive 2015–2024</li>
+          <li>Export CSV + Parquet (format optimisé)</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="ic-title">Notebook 02 · Analyse exploratoire</div>
+        <ul class="ic-list">
+          <li>Évolution de l'électrification (+1200% sur 9 ans)</li>
+          <li>Matrice de corrélation · tests ANOVA et Student</li>
+          <li>Analyse géographique 8 pays européens</li>
+          <li>Courbes de dépréciation par segment</li>
+          <li>Visualisations interactives Plotly</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="ic-title">Notebook 03 · Machine Learning</div>
+        <ul class="ic-list">
+          <li>Régression : Linear, Ridge, RF, GB, XGBoost → R² 0.92</li>
+          <li>Classification carburant → Accuracy 87.5%</li>
+          <li>Clustering K-Means (méthode du coude, 5 segments)</li>
+          <li>Visualisation 3D des clusters Prix/Puissance/CO₂</li>
+          <li>Feature importance + sauvegarde modèles (.pkl)</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="ic-title">Stack technique</div>
+        <ul class="ic-list">
+          <li>Pandas · NumPy · SciPy — manipulation et stats</li>
+          <li>Scikit-learn · XGBoost — modèles ML</li>
+          <li>Plotly · Seaborn · Matplotlib — visualisation</li>
+          <li>Jupyter Notebook · tqdm — workflow</li>
+          <li>Pickle · Parquet — persistence des modèles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════ PROJET 02 ══════════════════════════════════ -->
+<section id="hospital">
+  <div class="detail-inner">
+    <div class="s-label" data-n="02">SQL · MySQL · Analyse</div>
+    <h2 class="s-title fi">Opérations<br>Hospitalières</h2>
+
+    <div class="detail-header fi">
+      <div>
+        <p class="s-sub" style="margin-bottom:1.5rem">
+          Conception d'une base de données relationnelle MySQL complète pour un hôpital. 
+          6 tables liées, requêtes analytiques sur les patients, l'activité, les médecins et les finances.
+        </p>
+        <div class="detail-kpis">
+          <div><div class="kpi-val" style="color:var(--accent2)">6</div><div class="kpi-label">Tables</div></div>
+          <div><div class="kpi-val" style="color:var(--accent2)">4</div><div class="kpi-label">Modules</div></div>
+          <div><div class="kpi-val" style="color:var(--accent2)">15+</div><div class="kpi-label">Requêtes</div></div>
+          <div><div class="kpi-val" style="color:var(--accent2)">FK</div><div class="kpi-label">Intégrité référentielle</div></div>
+        </div>
+      </div>
+      <a href="https://github.com/Benouattara" target="_blank" class="btn btn-dark" style="align-self:flex-start">↗ GitHub</a>
+    </div>
+
+    <!-- Schema visuel -->
+    <div class="fi" style="background:var(--ink);padding:2rem;margin-bottom:1.5rem;overflow-x:auto">
+      <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:1.2rem">Schéma relationnel — 6 tables</div>
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;align-items:flex-start">
+        <!-- Tables visuelles -->
+        <div style="border:1px solid rgba(42,107,200,.5);padding:1rem;min-width:150px">
+          <div style="color:var(--accent2);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem;border-bottom:1px solid rgba(42,107,200,.3);padding-bottom:.4rem">patients</div>
+          <div style="color:rgba(255,255,255,.5);font-size:.62rem;line-height:1.7">
+            🔑 patient_id<br>first_name / last_name<br>gender / birth_date<br>city / insurance_type<br>registration_date
+          </div>
+        </div>
+        <div style="border:1px solid rgba(42,107,200,.5);padding:1rem;min-width:150px">
+          <div style="color:var(--accent2);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem;border-bottom:1px solid rgba(42,107,200,.3);padding-bottom:.4rem">doctors</div>
+          <div style="color:rgba(255,255,255,.5);font-size:.62rem;line-height:1.7">
+            🔑 doctor_id<br>full_name<br>specialty<br>🔗 department_id<br>hire_date
+          </div>
+        </div>
+        <div style="border:1px solid rgba(42,107,200,.5);padding:1rem;min-width:150px">
+          <div style="color:var(--accent2);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem;border-bottom:1px solid rgba(42,107,200,.3);padding-bottom:.4rem">departments</div>
+          <div style="color:rgba(255,255,255,.5);font-size:.62rem;line-height:1.7">
+            🔑 department_id<br>department_name
+          </div>
+        </div>
+        <div style="border:1px solid rgba(200,82,42,.6);padding:1rem;min-width:160px">
+          <div style="color:var(--accent);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem;border-bottom:1px solid rgba(200,82,42,.3);padding-bottom:.4rem">visits ← pivot</div>
+          <div style="color:rgba(255,255,255,.5);font-size:.62rem;line-height:1.7">
+            🔑 visit_id<br>🔗 patient_id<br>🔗 doctor_id<br>visit_date / visit_type<br>diagnosis
+          </div>
+        </div>
+        <div style="border:1px solid rgba(42,107,200,.5);padding:1rem;min-width:150px">
+          <div style="color:var(--accent2);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem;border-bottom:1px solid rgba(42,107,200,.3);padding-bottom:.4rem">treatments</div>
+          <div style="color:rgba(255,255,255,.5);font-size:.62rem;line-height:1.7">
+            🔑 treatment_id<br>🔗 visit_id<br>treatment_name<br>treatment_cost
+          </div>
+        </div>
+        <div style="border:1px solid rgba(42,107,200,.5);padding:1rem;min-width:150px">
+          <div style="color:var(--accent2);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem;border-bottom:1px solid rgba(42,107,200,.3);padding-bottom:.4rem">payments</div>
+          <div style="color:rgba(255,255,255,.5);font-size:.62rem;line-height:1.7">
+            🔑 payment_id<br>🔗 visit_id<br>payment_date<br>amount_paid<br>payment_status
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code SQL viewer -->
+    <div class="code-viewer full-width fi" style="margin-bottom:1.5rem">
+      <div class="cv-tabs" id="sql-tabs">
+        <button class="cv-tab active" onclick="showSQL('schema')">Création des tables</button>
+        <button class="cv-tab" onclick="showSQL('patients')">A. Analyse Patients</button>
+        <button class="cv-tab" onclick="showSQL('activity')">B. Activité Hospitalière</button>
+        <button class="cv-tab" onclick="showSQL('perf')">C. Performance Services</button>
+        <button class="cv-tab" onclick="showSQL('finance')">D. Analyse Financière</button>
+      </div>
+      <div class="cv-header">
+        <div class="cv-dots"><div class="cv-dot cv-dot-r"></div><div class="cv-dot cv-dot-y"></div><div class="cv-dot cv-dot-g"></div></div>
+        <span class="cv-fname" id="sql-fname">hospital_analysis.sql</span>
+      </div>
+      <div class="cv-body" id="sql-code"></div>
+    </div>
+
+    <div class="detail-grid fi">
+      <div class="info-card">
+        <div class="ic-title">A. Analyse des Patients</div>
+        <ul class="ic-list">
+          <li>Nombre total de patients → indicateur de capacité</li>
+          <li>Répartition par type d'assurance (Public / Privé / Aucune)</li>
+          <li>Âge moyen via TIMESTAMPDIFF → adaptation des spécialités</li>
+          <li>Détection risque d'impayés (patients sans assurance)</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="ic-title">B. Activité Hospitalière</div>
+        <ul class="ic-list">
+          <li>Nombre de visites par an → évolution de l'activité</li>
+          <li>Répartition Consultation / Urgence / Suivi</li>
+          <li>Détection surcharge urgences et qualité du suivi</li>
+          <li>Tendances temporelles pour planification des ressources</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="ic-title">C. Performance des Services</div>
+        <ul class="ic-list">
+          <li>Visites par département via triple JOIN</li>
+          <li>Identification des services les plus sollicités</li>
+          <li>Charge moyenne par médecin (argument RH)</li>
+          <li>Détection des médecins surchargés → recrutement</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="ic-title">D. Analyse Financière</div>
+        <ul class="ic-list">
+          <li>Coût total des traitements → activité médicale réelle</li>
+          <li>Coût moyen par visite → pilotage budgétaire</li>
+          <li>Revenus encaissés (statut = 'Paid')</li>
+          <li>Taux d'impayés → indicateur critique de risque financier</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════ PROJET 03 ══════════════════════════════════ -->
+<section id="bi" class="detail-section">
+  <div class="detail-inner">
+    <div class="s-label" data-n="03">Power BI · DAX · Dashboard</div>
+    <h2 class="s-title fi">Dashboard Financier<br>Hospitalier</h2>
+
+    <div class="detail-header fi">
+      <div>
+        <p class="s-sub" style="margin-bottom:1.5rem">
+          Rapport Power BI interactif pour le pilotage financier d'un hôpital. 
+          Visualisations dynamiques, KPIs temps réel, analyse des revenus, coûts et impayés par département.
+        </p>
+        <div class="detail-kpis">
+          <div><div class="kpi-val" style="color:var(--gold)">Power BI</div><div class="kpi-label">Outil</div></div>
+          <div><div class="kpi-val" style="color:var(--gold)">DAX</div><div class="kpi-label">Langage</div></div>
+          <div><div class="kpi-val" style="color:var(--gold)">.pbix</div><div class="kpi-label">Format</div></div>
+          <div><div class="kpi-val" style="color:var(--gold)">KPIs</div><div class="kpi-label">Financiers</div></div>
+        </div>
+      </div>
+      <a href="https://github.com/Benouattara" target="_blank" class="btn btn-dark" style="align-self:flex-start">↗ GitHub</a>
+    </div>
+
+    <!-- Dashboard preview -->
+    <div class="fi" style="background:var(--ink);padding:2.5rem;margin-bottom:1.5rem">
+      <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem">Aperçu du dashboard — Analyse_financière_de_l_hôpital.pbix</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.08);margin-bottom:1px">
+        <div style="background:#0d1117;padding:1.5rem;text-align:center">
+          <div style="font-family:var(--serif);font-size:2rem;font-weight:900;color:var(--accent3)">Revenus</div>
+          <div style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.3rem">Total encaissé (Paid)</div>
+        </div>
+        <div style="background:#0d1117;padding:1.5rem;text-align:center">
+          <div style="font-family:var(--serif);font-size:2rem;font-weight:900;color:var(--accent)">Coûts</div>
+          <div style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.3rem">Traitements totaux</div>
+        </div>
+        <div style="background:#0d1117;padding:1.5rem;text-align:center">
+          <div style="font-family:var(--serif);font-size:2rem;font-weight:900;color:var(--gold)">Impayés</div>
+          <div style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.3rem">Taux de non-paiement</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:1px;background:rgba(255,255,255,.08)">
+        <div style="background:#0d1117;padding:1.5rem">
+          <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1rem">Revenus par département</div>
+          <div style="display:flex;flex-direction:column;gap:.6rem">
+            <div style="display:flex;align-items:center;gap:.8rem">
+              <span style="font-size:.65rem;color:rgba(255,255,255,.5);min-width:90px">Cardiologie</span>
+              <div style="flex:1;height:8px;background:rgba(255,255,255,.07);border-radius:4px"><div style="height:100%;width:78%;background:var(--gold);border-radius:4px"></div></div>
+              <span style="font-size:.65rem;color:rgba(255,255,255,.5)">78%</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.8rem">
+              <span style="font-size:.65rem;color:rgba(255,255,255,.5);min-width:90px">Urgences</span>
+              <div style="flex:1;height:8px;background:rgba(255,255,255,.07);border-radius:4px"><div style="height:100%;width:65%;background:var(--accent);border-radius:4px"></div></div>
+              <span style="font-size:.65rem;color:rgba(255,255,255,.5)">65%</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.8rem">
+              <span style="font-size:.65rem;color:rgba(255,255,255,.5);min-width:90px">Pédiatrie</span>
+              <div style="flex:1;height:8px;background:rgba(255,255,255,.07);border-radius:4px"><div style="height:100%;width:48%;background:var(--accent2);border-radius:4px"></div></div>
+              <span style="font-size:.65rem;color:rgba(255,255,255,.5)">48%</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.8rem">
+              <span style="font-size:.65rem;color:rgba(255,255,255,.5);min-width:90px">Chirurgie</span>
+              <div style="flex:1;height:8px;background:rgba(255,255,255,.07);border-radius:4px"><div style="height:100%;width:91%;background:var(--accent3);border-radius:4px"></div></div>
+              <span style="font-size:.65rem;color:rgba(255,255,255,.5)">91%</span>
+            </div>
+          </div>
+        </div>
+        <div style="background:#0d1117;padding:1.5rem">
+          <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1rem">Statut paiements</div>
+          <div style="display:flex;flex-direction:column;gap:.8rem">
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:.3rem">
+                <span style="font-size:.62rem;color:var(--accent3)">● Payé</span>
+                <span style="font-size:.62rem;color:rgba(255,255,255,.4)">68%</span>
+              </div>
+              <div style="height:6px;background:rgba(255,255,255,.07);border-radius:3px"><div style="height:100%;width:68%;background:var(--accent3);border-radius:3px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:.3rem">
+                <span style="font-size:.62rem;color:var(--gold)">● En attente</span>
+                <span style="font-size:.62rem;color:rgba(255,255,255,.4)">22%</span>
+              </div>
+              <div style="height:6px;background:rgba(255,255,255,.07);border-radius:3px"><div style="height:100%;width:22%;background:var(--gold);border-radius:3px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:.3rem">
+                <span style="font-size:.62rem;color:var(--accent)">● Rejeté</span>
+                <span style="font-size:.62rem;color:rgba(255,255,255,.4)">10%</span>
+              </div>
+              <div style="height:6px;background:rgba(255,255,255,.07);border-radius:3px"><div style="height:100%;width:10%;background:var(--accent);border-radius:3px"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAX Code viewer -->
+    <div class="code-viewer full-width fi" style="margin-bottom:1.5rem">
+      <div class="cv-tabs">
+        <button class="cv-tab active" onclick="showDAX('measures')">Mesures DAX</button>
+        <button class="cv-tab" onclick="showDAX('kpis')">KPIs Financiers</button>
+        <button class="cv-tab" onclick="showDAX('time')">Time Intelligence</button>
+      </div>
+      <div class="cv-header">
+        <div class="cv-dots"><div class="cv-dot cv-dot-r"></div><div class="cv-dot cv-dot-y"></div><div class="cv-dot cv-dot-g"></div></div>
+        <span class="cv-fname" id="dax-fname">Analyse_financiere_hopital.pbix — Mesures DAX</span>
+      </div>
+      <div class="cv-body" id="dax-code"></div>
+    </div>
+
+    <div class="detail-grid fi">
+      <div class="info-card">
+        <div class="ic-title">Visuels & Interactions</div>
+        <ul class="ic-list">
+          <li>Cartes KPI : Revenus totaux, Coûts, Taux d'impayés</li>
+          <li>Histogrammes revenus par département et par mois</li>
+          <li>Graphique circulaire : répartition des statuts de paiement</li>
+          <li>Slicers : filtre par période, département, type d'assurance</li>
+          <li>Drill-down : département → médecin → patient</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="ic-title">Logique DAX</div>
+        <ul class="ic-list">
+          <li>Mesures CALCULATE + FILTER pour revenus filtrés</li>
+          <li>DIVIDE sécurisé pour éviter les divisions par zéro</li>
+          <li>Time Intelligence : SAMEPERIODLASTYEAR, DATESYTD</li>
+          <li>Colonnes calculées pour catégorisation des patients</li>
+          <li>Variables VAR pour formules lisibles et performantes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="s-label" data-n="—">Compétences</div>
+  <h2 class="s-title fi">Stack Technique</h2>
+  <p class="s-sub fi" style="color:rgba(255,255,255,.45)">Technologies maîtrisées à travers ces projets et au-delà.</p>
+
+  <div class="skills-grid fi">
+    <div class="skill-block">
+      <div class="skill-cat">Langages & Data</div>
+      <div class="skill-items">
+        <span class="sk-item">Python 3.10+</span>
+        <span class="sk-item">SQL / MySQL</span>
+        <span class="sk-item">DAX</span>
+        <span class="sk-item">Pandas</span>
+        <span class="sk-item">NumPy</span>
+        <span class="sk-item">SciPy</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-cat">Machine Learning</div>
+      <div class="skill-items">
+        <span class="sk-item">Scikit-learn</span>
+        <span class="sk-item">XGBoost</span>
+        <span class="sk-item">Random Forest</span>
+        <span class="sk-item">K-Means</span>
+        <span class="sk-item">Régression</span>
+        <span class="sk-item">Classification</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-cat">Visualisation & BI</div>
+      <div class="skill-items">
+        <span class="sk-item">Power BI</span>
+        <span class="sk-item">Plotly</span>
+        <span class="sk-item">Seaborn</span>
+        <span class="sk-item">Matplotlib</span>
+        <span class="sk-item">Dashboards</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-cat">Outils & DevOps</div>
+      <div class="skill-items">
+        <span class="sk-item">Jupyter Notebook</span>
+        <span class="sk-item">Git / GitHub</span>
+        <span class="sk-item">VS Code</span>
+        <span class="sk-item">MySQL Workbench</span>
+        <span class="sk-item">Parquet</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-cat">Analyse & Stats</div>
+      <div class="skill-items">
+        <span class="sk-item">Tests ANOVA</span>
+        <span class="sk-item">Corrélations</span>
+        <span class="sk-item">Feature Engineering</span>
+        <span class="sk-item">Clustering</span>
+        <span class="sk-item">KPIs</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-cat">Domaines métier</div>
+      <div class="skill-items">
+        <span class="sk-item">Santé / Hôpital</span>
+        <span class="sk-item">Automobile</span>
+        <span class="sk-item">Finance</span>
+        <span class="sk-item">RH / Performance</span>
+        <span class="sk-item">Marché EU</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <p style="font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">— Disponible pour missions & opportunités —</p>
+    <div class="contact-big fi">Travaillons<br><em>ensemble</em></div>
+    <div style="margin-bottom:1rem">
+      <a href="mailto:benouattara3@gmail.com" class="contact-email fi">benouattara3@gmail.com</a>
+    </div>
+    <div class="contact-links fi">
+      <a href="https://github.com/Benouattara" target="_blank" class="btn btn-dark">↗ GitHub · Benouattara</a>
+      <a href="mailto:benouattara3@gmail.com" class="btn btn-outline">✉ M'écrire</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2024 — Ben OUATTARA</span>
+  <span>Data Analyst · Python · SQL · Power BI</span>
+  <a href="https://github.com/Benouattara" target="_blank" style="color:var(--muted);text-decoration:none;transition:color .2s" onmouseenter="this.style.color='var(--accent)'" onmouseleave="this.style.color='var(--muted)'">github.com/Benouattara ↗</a>
+</footer>
+
+<script>
+// ── Cursor
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.project-card,.sk-item,.chip').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';cur.style.background='var(--accent)';curR.style.opacity='.8'});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';curR.style.opacity='.5'});
+});
+
+// ── Scroll reveal
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.12});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+
+// ── Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'})}));
+
+// ══════════════════════════════════
+// CODE DATA
+// ══════════════════════════════════
+
+const autoCode = {
+  gen: {
+    fname: '01_data_generation.ipynb',
+    code: `<span class="cm"># ── Configuration</span>
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime, timedelta
+<span class="kw">import</span> random
+<span class="kw">from</span> tqdm <span class="kw">import</span> tqdm
+
+N_VEHICLES = <span class="num">50000</span>
+np.random.seed(<span class="num">42</span>)
+
+BRANDS_MODELS = {
+    <span class="str">'Renault'</span>: [<span class="str">'Clio'</span>, <span class="str">'Megane'</span>, <span class="str">'Captur'</span>, <span class="str">'Zoe'</span>],
+    <span class="str">'Volkswagen'</span>: [<span class="str">'Golf'</span>, <span class="str">'Polo'</span>, <span class="str">'ID.3'</span>, <span class="str">'ID.4'</span>],
+    <span class="str">'Tesla'</span>: [<span class="str">'Model 3'</span>, <span class="str">'Model Y'</span>, <span class="str">'Model S'</span>],
+    <span class="cm"># ... 15 marques au total</span>
+}
+
+FUEL_TYPES = [<span class="str">'Essence'</span>, <span class="str">'Diesel'</span>, <span class="str">'Hybride'</span>, <span class="str">'Electrique'</span>, <span class="str">'Hybride rechargeable'</span>]
+
+<span class="kw">def</span> <span class="fn">generate_vehicle_data</span>(n):
+    vehicles = []
+    <span class="kw">for</span> i <span class="kw">in</span> tqdm(range(n), desc=<span class="str">"Génération..."</span>):
+        brand = random.choice(list(BRANDS_MODELS.keys()))
+        model = random.choice(BRANDS_MODELS[brand])
+        year  = random.randint(<span class="num">2015</span>, <span class="num">2024</span>)
+
+        <span class="cm"># Distribution carburant évolutive selon l'année</span>
+        <span class="kw">if</span> year &lt; <span class="num">2018</span>:
+            weights = [<span class="num">0.45</span>, <span class="num">0.50</span>, <span class="num">0.03</span>, <span class="num">0.01</span>, <span class="num">0.01</span>]
+        <span class="kw">elif</span> year &lt; <span class="num">2021</span>:
+            weights = [<span class="num">0.40</span>, <span class="num">0.40</span>, <span class="num">0.10</span>, <span class="num">0.05</span>, <span class="num">0.05</span>]
+        <span class="kw">else</span>:
+            weights = [<span class="num">0.30</span>, <span class="num">0.25</span>, <span class="num">0.20</span>, <span class="num">0.15</span>, <span class="num">0.10</span>]
+
+        fuel = random.choices(FUEL_TYPES, weights=weights)[<span class="num">0</span>]
+
+        <span class="cm"># Prix basé marque + année + carburant</span>
+        base = {<span class="str">'Tesla'</span>: <span class="num">45000</span>, <span class="str">'BMW'</span>: <span class="num">38000</span>, <span class="str">'Renault'</span>: <span class="num">20000</span>}[brand]
+        price = int(base * (<span class="num">1</span> + (year-<span class="num">2015</span>)*<span class="num">0.03</span>) * random.uniform(<span class="num">0.9</span>, <span class="num">1.1</span>))
+
+        vehicles.append({
+            <span class="str">'id'</span>: f<span class="str">'VEH_{i+1:05d}'</span>, <span class="str">'marque'</span>: brand,
+            <span class="str">'modele'</span>: model, <span class="str">'annee'</span>: year,
+            <span class="str">'carburant'</span>: fuel, <span class="str">'prix_euro'</span>: price,
+        })
+    <span class="kw">return</span> pd.DataFrame(vehicles)
+
+df = generate_vehicle_data(N_VEHICLES)
+df.to_csv(<span class="str">'data/raw/vehicles_dataset.csv'</span>, index=<span class="kw">False</span>)
+df.to_parquet(<span class="str">'data/raw/vehicles_dataset.parquet'</span>, index=<span class="kw">False</span>)
+print(f<span class="str">"✅ {len(df):,} véhicules générés"</span>)`
+  },
+  eda: {
+    fname: '02_exploratory_analysis.ipynb',
+    code: `<span class="kw">import</span> plotly.express <span class="kw">as</span> px
+<span class="kw">from</span> scipy <span class="kw">import</span> stats
+
+df = pd.read_csv(<span class="str">'data/raw/vehicles_dataset.csv'</span>)
+
+<span class="cm"># ── 1. Évolution de l'électrification</span>
+fuel_evo = df.groupby([<span class="str">'annee'</span>, <span class="str">'carburant'</span>]).size().reset_index(name=<span class="str">'count'</span>)
+fuel_pct = fuel_evo.pivot(index=<span class="str">'annee'</span>, columns=<span class="str">'carburant'</span>, values=<span class="str">'count'</span>).fillna(<span class="num">0</span>)
+fuel_pct = fuel_pct.div(fuel_pct.sum(axis=<span class="num">1</span>), axis=<span class="num">0</span>) * <span class="num">100</span>
+
+fig = px.line(fuel_pct, title=<span class="str">'Part de marché par carburant (%)'</span>)
+fig.show()
+
+<span class="cm"># ── 2. Matrice de corrélation</span>
+num_vars = [<span class="str">'annee'</span>, <span class="str">'puissance_cv'</span>, <span class="str">'co2_g_km'</span>, <span class="str">'prix_euro'</span>, <span class="str">'kilometrage'</span>]
+corr = df[num_vars].corr()
+sns.heatmap(corr, annot=<span class="kw">True</span>, fmt=<span class="str">'.2f'</span>, cmap=<span class="str">'RdYlGn'</span>, center=<span class="num">0</span>)
+
+<span class="cm"># ── 3. Test ANOVA — prix par type de carburant</span>
+groups = [df[df[<span class="str">'carburant'</span>]==f][<span class="str">'prix_euro'</span>] <span class="kw">for</span> f <span class="kw">in</span> df[<span class="str">'carburant'</span>].unique()]
+f_stat, p_val = stats.f_oneway(*groups)
+print(f<span class="str">"ANOVA F={f_stat:.3f} p={p_val:.2e} → {'Significatif' if p_val &lt; 0.05 else 'Non sig.'}"</span>)
+
+<span class="cm"># ── 4. Dépréciation par segment</span>
+df[<span class="str">'age'</span>] = <span class="num">2024</span> - df[<span class="str">'annee'</span>]
+fig2 = px.scatter(df.sample(<span class="num">5000</span>), x=<span class="str">'age'</span>, y=<span class="str">'prix_euro'</span>,
+    color=<span class="str">'segment'</span>, trendline=<span class="str">'lowess'</span>,
+    title=<span class="str">"Dépréciation selon l'âge"</span>)
+fig2.show()
+
+<span class="cm"># ── 5. Analyse géographique</span>
+geo = df.groupby(<span class="str">'pays'</span>).agg(
+    nb=(<span class="str">'id'</span>, <span class="str">'count'</span>),
+    prix_moy=(<span class="str">'prix_euro'</span>, <span class="str">'mean'</span>),
+    co2_moy=(<span class="str">'co2_g_km'</span>, <span class="str">'mean'</span>)
+).round(<span class="num">0</span>)
+print(geo.sort_values(<span class="str">'nb'</span>, ascending=<span class="kw">False</span>))`
+  },
+  ml: {
+    fname: '03_machine_learning.ipynb',
+    code: `<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
+<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestRegressor, GradientBoostingRegressor
+<span class="kw">from</span> sklearn.cluster <span class="kw">import</span> KMeans
+<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> r2_score, mean_squared_error
+<span class="kw">import</span> xgboost <span class="kw">as</span> xgb
+
+<span class="cm"># ── Feature Engineering</span>
+df[<span class="str">'km_par_an'</span>]  = df[<span class="str">'kilometrage'</span>] / (df[<span class="str">'age'</span>] + <span class="num">1</span>)
+df[<span class="str">'efficience'</span>] = df[<span class="str">'puissance_cv'</span>] / (df[<span class="str">'consommation'</span>] + <span class="num">0.1</span>)
+df[<span class="str">'prix_par_cv'</span>]= df[<span class="str">'prix_euro'</span>] / df[<span class="str">'puissance_cv'</span>]
+df[<span class="str">'is_premium'</span>] = df[<span class="str">'marque'</span>].isin([<span class="str">'BMW'</span>,<span class="str">'Mercedes'</span>,<span class="str">'Audi'</span>,<span class="str">'Tesla'</span>]).astype(int)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="num">0.2</span>, random_state=<span class="num">42</span>)
+
+<span class="cm"># ── 5 modèles comparés</span>
+models = {
+    <span class="str">'Linear Reg.'</span>    : LinearRegression(),
+    <span class="str">'Ridge'</span>          : Ridge(alpha=<span class="num">100</span>),
+    <span class="str">'Random Forest'</span>  : RandomForestRegressor(n_estimators=<span class="num">100</span>, n_jobs=<span class="num">-1</span>),
+    <span class="str">'Gradient Boost'</span> : GradientBoostingRegressor(n_estimators=<span class="num">100</span>),
+    <span class="str">'XGBoost'</span>        : xgb.XGBRegressor(n_estimators=<span class="num">100</span>, learning_rate=<span class="num">0.1</span>),
+}
+results = {}
+<span class="kw">for</span> name, model <span class="kw">in</span> models.items():
+    model.fit(X_train, y_train)
+    pred = model.predict(X_test)
+    results[name] = {<span class="str">'R²'</span>: r2_score(y_test, pred),
+                     <span class="str">'RMSE'</span>: np.sqrt(mean_squared_error(y_test, pred))}
+    print(f<span class="str">"{name:20s}  R²={results[name]['R²']:.4f}  RMSE={results[name]['RMSE']:,.0f}€"</span>)
+
+<span class="cm"># XGBoost : R²=0.9234  RMSE=3 148€  ← MEILLEUR</span>
+
+<span class="cm"># ── K-Means — Segmentation</span>
+scaler = StandardScaler()
+X_km = scaler.fit_transform(df[[<span class="str">'prix_euro'</span>,<span class="str">'puissance_cv'</span>,<span class="str">'co2_g_km'</span>,<span class="str">'consommation'</span>]])
+kmeans = KMeans(n_clusters=<span class="num">5</span>, random_state=<span class="num">42</span>, n_init=<span class="num">10</span>)
+df[<span class="str">'cluster'</span>] = kmeans.fit_predict(X_km)
+
+<span class="cm"># 3D visualisation</span>
+fig = px.scatter_3d(df.sample(<span class="num">5000</span>), x=<span class="str">'prix_euro'</span>, y=<span class="str">'puissance_cv'</span>,
+    z=<span class="str">'co2_g_km'</span>, color=<span class="str">'cluster'</span>, title=<span class="str">'Segmentation 3D'</span>)
+fig.show()`
+  },
+  proc: {
+    fname: 'src/data_processing.py',
+    code: `<span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> typing <span class="kw">import</span> List, Dict, Tuple
+
+<span class="kw">def</span> <span class="fn">calculate_efficiency_metrics</span>(df: pd.<span class="cl">DataFrame</span>) -> pd.<span class="cl">DataFrame</span>:
+    <span class="str">"""
+    Calcule les métriques d'efficience pour chaque véhicule.
+    Args: df — DataFrame des véhicules
+    Returns: DataFrame enrichi avec nouvelles colonnes
+    """</span>
+    df = df.copy()
+    df[<span class="str">'efficience'</span>] = df[<span class="str">'puissance_cv'</span>] / (df[<span class="str">'consommation'</span>] + <span class="num">0.1</span>)
+    df[<span class="str">'prix_par_cv'</span>] = df[<span class="str">'prix_euro'</span>] / df[<span class="str">'puissance_cv'</span>]
+    df[<span class="str">'score_eco'</span>]   = <span class="num">100</span> - (df[<span class="str">'co2_g_km'</span>] / df[<span class="str">'co2_g_km'</span>].max() * <span class="num">100</span>)
+    <span class="kw">return</span> df
+
+<span class="kw">def</span> <span class="fn">get_market_share</span>(df: pd.<span class="cl">DataFrame</span>, group_by: str, year: int = <span class="kw">None</span>):
+    <span class="str">"""Part de marché par catégorie (marque, carburant, etc.)"""</span>
+    subset = df[df[<span class="str">'annee'</span>] == year] <span class="kw">if</span> year <span class="kw">else</span> df
+    ms = subset.groupby(group_by).size().reset_index(name=<span class="str">'count'</span>)
+    ms[<span class="str">'part_%'</span>] = (ms[<span class="str">'count'</span>] / ms[<span class="str">'count'</span>].sum() * <span class="num">100</span>).round(<span class="num">2</span>)
+    <span class="kw">return</span> ms.sort_values(<span class="str">'part_%'</span>, ascending=<span class="kw">False</span>)
+
+<span class="kw">def</span> <span class="fn">identify_outliers</span>(df: pd.<span class="cl">DataFrame</span>, col: str, method=<span class="str">'iqr'</span>) -> pd.<span class="cl">Series</span>:
+    <span class="str">"""Détection des valeurs aberrantes (IQR ou z-score)"""</span>
+    <span class="kw">if</span> method == <span class="str">'iqr'</span>:
+        Q1, Q3 = df[col].quantile(<span class="num">0.25</span>), df[col].quantile(<span class="num">0.75</span>)
+        IQR = Q3 - Q1
+        <span class="kw">return</span> (df[col] &lt; Q1 - <span class="num">1.5</span>*IQR) | (df[col] > Q3 + <span class="num">1.5</span>*IQR)
+    <span class="kw">elif</span> method == <span class="str">'zscore'</span>:
+        <span class="kw">from</span> scipy <span class="kw">import</span> stats
+        <span class="kw">return</span> np.abs(stats.zscore(df[col])) > <span class="num">3</span>
+
+<span class="kw">def</span> <span class="fn">generate_summary_report</span>(df: pd.<span class="cl">DataFrame</span>) -> Dict:
+    <span class="str">"""Rapport résumé du dataset automobile"""</span>
+    <span class="kw">return</span> {
+        <span class="str">'total_vehicules'</span>     : len(df),
+        <span class="str">'prix_moyen'</span>          : f<span class="str">"{df['prix_euro'].mean():,.0f}€"</span>,
+        <span class="str">'taux_electrification'</span>: f<span class="str">"{(df['carburant'].isin(['Electrique','Hybride']).sum()/len(df)*100):.1f}%"</span>,
+        <span class="str">'top_marque'</span>          : df[<span class="str">'marque'</span>].value_counts().index[<span class="num">0</span>],
+        <span class="str">'emissions_moy'</span>       : f<span class="str">"{df['co2_g_km'].mean():.0f} g/km"</span>,
+    }`
+  }
+};
+
+const sqlCode = {
+  schema: {
+    fname: 'hospital_analysis.sql — Création des tables',
+    code: `<span class="cm">-- Base de données complète : 6 tables avec FK</span>
+<span class="kw">CREATE</span> DATABASE hospital_operations;
+
+<span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="cl">patients</span> (
+    patient_id   <span class="kw2">INT</span> <span class="kw">PRIMARY KEY</span>,
+    first_name   <span class="kw2">VARCHAR</span>(<span class="num">50</span>),
+    last_name    <span class="kw2">VARCHAR</span>(<span class="num">50</span>),
+    gender       <span class="kw2">CHAR</span>(<span class="num">1</span>),
+    birth_date   <span class="kw2">DATE</span>,
+    city         <span class="kw2">VARCHAR</span>(<span class="num">100</span>),
+    insurance_type   <span class="kw2">VARCHAR</span>(<span class="num">50</span>),   <span class="cm">-- Public / Private / None</span>
+    registration_date <span class="kw2">DATE</span>
+) CHARACTER SET utf8mb4;
+
+<span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="cl">departments</span> (
+    department_id   <span class="kw2">INT</span> <span class="kw">PRIMARY KEY</span>,
+    department_name <span class="kw2">VARCHAR</span>(<span class="num">100</span>)
+) CHARACTER SET utf8mb4;
+
+<span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="cl">doctors</span> (
+    doctor_id     <span class="kw2">INT</span> <span class="kw">PRIMARY KEY</span>,
+    full_name     <span class="kw2">VARCHAR</span>(<span class="num">100</span>),
+    specialty     <span class="kw2">VARCHAR</span>(<span class="num">100</span>),
+    department_id <span class="kw2">INT</span>,
+    hire_date     <span class="kw2">DATE</span>,
+    <span class="kw">FOREIGN KEY</span> (department_id) <span class="kw">REFERENCES</span> departments(department_id)
+) CHARACTER SET utf8mb4;
+
+<span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="cl">visits</span> (
+    visit_id   <span class="kw2">INT</span> <span class="kw">PRIMARY KEY</span>,
+    patient_id <span class="kw2">INT</span>,
+    doctor_id  <span class="kw2">INT</span>,
+    visit_date <span class="kw2">DATE</span>,
+    visit_type <span class="kw2">VARCHAR</span>(<span class="num">50</span>),  <span class="cm">-- Consultation / Urgence / Suivi</span>
+    diagnosis  <span class="kw2">VARCHAR</span>(<span class="num">255</span>),
+    <span class="kw">FOREIGN KEY</span> (patient_id) <span class="kw">REFERENCES</span> patients(patient_id),
+    <span class="kw">FOREIGN KEY</span> (doctor_id)  <span class="kw">REFERENCES</span> doctors(doctor_id)
+) CHARACTER SET utf8mb4;
+
+<span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="cl">treatments</span> (
+    treatment_id   <span class="kw2">INT</span> <span class="kw">PRIMARY KEY</span>,
+    visit_id       <span class="kw2">INT</span>,
+    treatment_name <span class="kw2">VARCHAR</span>(<span class="num">100</span>),
+    treatment_cost <span class="kw2">DECIMAL</span>(<span class="num">10</span>,<span class="num">2</span>),
+    <span class="kw">FOREIGN KEY</span> (visit_id) <span class="kw">REFERENCES</span> visits(visit_id)
+) CHARACTER SET utf8mb4;
+
+<span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="cl">payments</span> (
+    payment_id     <span class="kw2">INT</span> <span class="kw">PRIMARY KEY</span>,
+    visit_id       <span class="kw2">INT</span>,
+    payment_date   <span class="kw2">DATE</span>,
+    amount_paid    <span class="kw2">DECIMAL</span>(<span class="num">10</span>,<span class="num">2</span>),
+    payment_status <span class="kw2">VARCHAR</span>(<span class="num">50</span>),  <span class="cm">-- Paid / Pending / Rejected</span>
+    <span class="kw">FOREIGN KEY</span> (visit_id) <span class="kw">REFERENCES</span> visits(visit_id)
+) CHARACTER SET utf8mb4;`
+  },
+  patients: {
+    fname: 'hospital_analysis.sql — A. Analyse des Patients',
+    code: `<span class="cm">-- ═══ A. ANALYSE DES PATIENTS ═══</span>
+
+<span class="cm">-- 1. Nombre total de patients
+-- Taille de la base → indicateur de capacité de l'hôpital</span>
+<span class="kw">SELECT</span> <span class="fn">COUNT</span>(*) <span class="kw">AS</span> total_patients
+<span class="kw">FROM</span> hospital_operations.patients;
+
+<span class="cm">-- 2. Répartition par type d'assurance
+-- Public  → dépendance aux financements publics
+-- Private → potentiel de rentabilité
+-- None    → risque d'impayés</span>
+<span class="kw">SELECT</span>
+    insurance_type,
+    <span class="fn">COUNT</span>(*) <span class="kw">AS</span> nb_patients,
+    <span class="fn">ROUND</span>(<span class="fn">COUNT</span>(*) * <span class="num">100.0</span> / <span class="fn">SUM</span>(<span class="fn">COUNT</span>(*)) <span class="kw">OVER</span>(), <span class="num">1</span>) <span class="kw">AS</span> pct
+<span class="kw">FROM</span> hospital_operations.patients
+<span class="kw">GROUP BY</span> insurance_type
+<span class="kw">ORDER BY</span> nb_patients <span class="kw">DESC</span>;
+
+<span class="cm">-- 3. Âge moyen des patients
+-- Permet d'adapter les spécialités (gériatrie, pédiatrie)</span>
+<span class="kw">SELECT</span>
+    <span class="fn">ROUND</span>(<span class="fn">AVG</span>(<span class="fn">TIMESTAMPDIFF</span>(<span class="kw">YEAR</span>, birth_date, <span class="fn">CURDATE</span>())), <span class="num">1</span>) <span class="kw">AS</span> age_moyen,
+    <span class="fn">MIN</span>(<span class="fn">TIMESTAMPDIFF</span>(<span class="kw">YEAR</span>, birth_date, <span class="fn">CURDATE</span>())) <span class="kw">AS</span> age_min,
+    <span class="fn">MAX</span>(<span class="fn">TIMESTAMPDIFF</span>(<span class="kw">YEAR</span>, birth_date, <span class="fn">CURDATE</span>())) <span class="kw">AS</span> age_max
+<span class="kw">FROM</span> hospital_operations.patients;
+
+<span class="cm">-- 4. Nouveaux patients par trimestre</span>
+<span class="kw">SELECT</span>
+    <span class="fn">YEAR</span>(registration_date)    <span class="kw">AS</span> annee,
+    <span class="fn">QUARTER</span>(registration_date) <span class="kw">AS</span> trimestre,
+    <span class="fn">COUNT</span>(*)                    <span class="kw">AS</span> nouveaux_patients
+<span class="kw">FROM</span> hospital_operations.patients
+<span class="kw">GROUP BY</span> annee, trimestre
+<span class="kw">ORDER BY</span> annee, trimestre;`
+  },
+  activity: {
+    fname: 'hospital_analysis.sql — B. Activité Hospitalière',
+    code: `<span class="cm">-- ═══ B. ACTIVITÉ HOSPITALIÈRE ═══</span>
+
+<span class="cm">-- 1. Nombre de visites par an
+-- Évolution de l'activité (croissance, stabilité, surcharge)</span>
+<span class="kw">SELECT</span>
+    <span class="fn">YEAR</span>(visit_date) <span class="kw">AS</span> year,
+    <span class="fn">COUNT</span>(*)         <span class="kw">AS</span> total_visits,
+    <span class="fn">COUNT</span>(*) - <span class="kw">LAG</span>(<span class="fn">COUNT</span>(*)) <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> <span class="fn">YEAR</span>(visit_date)) <span class="kw">AS</span> evolution
+<span class="kw">FROM</span> hospital_operations.visits
+<span class="kw">GROUP BY</span> year
+<span class="kw">ORDER BY</span> year;
+
+<span class="cm">-- 2. Répartition des types de visites
+-- Emergency élevé → pression sur les urgences
+-- Follow-up       → qualité du suivi patient</span>
+<span class="kw">SELECT</span>
+    visit_type,
+    <span class="fn">COUNT</span>(*)                              <span class="kw">AS</span> nb_visits,
+    <span class="fn">ROUND</span>(<span class="fn">COUNT</span>(*) * <span class="num">100.0</span> /
+        <span class="fn">SUM</span>(<span class="fn">COUNT</span>(*)) <span class="kw">OVER</span>(), <span class="num">1</span>)       <span class="kw">AS</span> pct
+<span class="kw">FROM</span> hospital_operations.visits
+<span class="kw">GROUP BY</span> visit_type
+<span class="kw">ORDER BY</span> nb_visits <span class="kw">DESC</span>;
+
+<span class="cm">-- 3. Visites par mois (saisonnalité)</span>
+<span class="kw">SELECT</span>
+    <span class="fn">DATE_FORMAT</span>(visit_date, <span class="str">'%Y-%m'</span>) <span class="kw">AS</span> mois,
+    <span class="fn">COUNT</span>(*)                          <span class="kw">AS</span> nb_visites
+<span class="kw">FROM</span> hospital_operations.visits
+<span class="kw">GROUP BY</span> mois
+<span class="kw">ORDER BY</span> mois;
+
+<span class="cm">-- 4. Top 10 diagnostics les plus fréquents</span>
+<span class="kw">SELECT</span>
+    diagnosis,
+    <span class="fn">COUNT</span>(*) <span class="kw">AS</span> occurrences
+<span class="kw">FROM</span> hospital_operations.visits
+<span class="kw">WHERE</span> diagnosis <span class="kw">IS NOT NULL</span>
+<span class="kw">GROUP BY</span> diagnosis
+<span class="kw">ORDER BY</span> occurrences <span class="kw">DESC</span>
+<span class="kw">LIMIT</span> <span class="num">10</span>;`
+  },
+  perf: {
+    fname: 'hospital_analysis.sql — C. Performance Services',
+    code: `<span class="cm">-- ═══ C. PERFORMANCE DES SERVICES ═══</span>
+
+<span class="cm">-- 1. Visites par département (triple JOIN)
+-- Identification des services les plus sollicités
+-- Aide à répartir les budgets et le personnel</span>
+<span class="kw">SELECT</span>
+    d.department_name,
+    <span class="fn">COUNT</span>(v.visit_id) <span class="kw">AS</span> total_visits,
+    <span class="fn">COUNT</span>(<span class="kw">DISTINCT</span> v.patient_id) <span class="kw">AS</span> patients_uniques
+<span class="kw">FROM</span> hospital_operations.visits v
+<span class="kw">JOIN</span> hospital_operations.doctors doc
+    <span class="kw">ON</span> v.doctor_id = doc.doctor_id
+<span class="kw">JOIN</span> hospital_operations.departments d
+    <span class="kw">ON</span> doc.department_id = d.department_id
+<span class="kw">GROUP BY</span> d.department_name
+<span class="kw">ORDER BY</span> total_visits <span class="kw">DESC</span>;
+
+<span class="cm">-- 2. Charge moyenne par médecin
+-- Détection des médecins surchargés → argument RH (recrutement)</span>
+<span class="kw">SELECT</span>
+    doc.full_name,
+    d.department_name,
+    doc.specialty,
+    <span class="fn">COUNT</span>(v.visit_id)                 <span class="kw">AS</span> visits_handled,
+    <span class="fn">ROUND</span>(<span class="fn">AVG</span>(t.treatment_cost), <span class="num">2</span>) <span class="kw">AS</span> cout_moy_traitement
+<span class="kw">FROM</span> hospital_operations.doctors doc
+<span class="kw">LEFT JOIN</span> hospital_operations.visits v
+    <span class="kw">ON</span> doc.doctor_id = v.doctor_id
+<span class="kw">LEFT JOIN</span> hospital_operations.treatments t
+    <span class="kw">ON</span> v.visit_id = t.visit_id
+<span class="kw">JOIN</span> hospital_operations.departments d
+    <span class="kw">ON</span> doc.department_id = d.department_id
+<span class="kw">GROUP BY</span> doc.full_name, d.department_name, doc.specialty
+<span class="kw">ORDER BY</span> visits_handled <span class="kw">DESC</span>;
+
+<span class="cm">-- 3. Médecins en dessous de la moyenne (sous-charge ?)</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> (
+    <span class="kw">SELECT</span> doc.full_name, <span class="fn">COUNT</span>(v.visit_id) <span class="kw">AS</span> nb
+    <span class="kw">FROM</span> hospital_operations.doctors doc
+    <span class="kw">LEFT JOIN</span> hospital_operations.visits v <span class="kw">ON</span> doc.doctor_id = v.doctor_id
+    <span class="kw">GROUP BY</span> doc.full_name
+) sub
+<span class="kw">WHERE</span> nb &lt; (<span class="kw">SELECT</span> <span class="fn">AVG</span>(nb2) <span class="kw">FROM</span> (
+    <span class="kw">SELECT</span> <span class="fn">COUNT</span>(*) <span class="kw">AS</span> nb2 <span class="kw">FROM</span> hospital_operations.visits <span class="kw">GROUP BY</span> doctor_id
+) avg_sub);`
+  },
+  finance: {
+    fname: 'hospital_analysis.sql — D. Analyse Financière',
+    code: `<span class="cm">-- ═══ D. ANALYSE FINANCIÈRE ═══</span>
+
+<span class="cm">-- 1. Coût total des traitements
+-- Coût réel de l'activité médicale</span>
+<span class="kw">SELECT</span> <span class="fn">ROUND</span>(<span class="fn">SUM</span>(treatment_cost), <span class="num">2</span>) <span class="kw">AS</span> total_treatment_cost
+<span class="kw">FROM</span> hospital_operations.treatments;
+
+<span class="cm">-- 2. Coût moyen par traitement → pilotage budgétaire</span>
+<span class="kw">SELECT</span> <span class="fn">ROUND</span>(<span class="fn">AVG</span>(treatment_cost), <span class="num">2</span>) <span class="kw">AS</span> avg_cost_per_treatment
+<span class="kw">FROM</span> hospital_operations.treatments;
+
+<span class="cm">-- 3. Revenus encaissés (Paid only)</span>
+<span class="kw">SELECT</span>
+    <span class="fn">ROUND</span>(<span class="fn">SUM</span>(amount_paid), <span class="num">2</span>) <span class="kw">AS</span> total_revenue
+<span class="kw">FROM</span> hospital_operations.payments
+<span class="kw">WHERE</span> payment_status = <span class="str">'Paid'</span>;
+
+<span class="cm">-- 4. Taux d'impayés — indicateur critique de risque financier</span>
+<span class="kw">SELECT</span>
+    <span class="fn">ROUND</span>(
+        <span class="num">100</span> * <span class="fn">SUM</span>(<span class="kw">CASE</span> <span class="kw">WHEN</span> payment_status != <span class="str">'Paid'</span> <span class="kw">THEN</span> <span class="num">1</span> <span class="kw">ELSE</span> <span class="num">0</span> <span class="kw">END</span>) / <span class="fn">COUNT</span>(*),
+    <span class="num">2</span>) <span class="kw">AS</span> taux_impayes_pct
+<span class="kw">FROM</span> hospital_operations.payments;
+
+<span class="cm">-- 5. Revenu vs Coût par département (rentabilité)</span>
+<span class="kw">SELECT</span>
+    d.department_name,
+    <span class="fn">ROUND</span>(<span class="fn">SUM</span>(p.amount_paid), <span class="num">0</span>)     <span class="kw">AS</span> revenus,
+    <span class="fn">ROUND</span>(<span class="fn">SUM</span>(t.treatment_cost), <span class="num">0</span>)  <span class="kw">AS</span> couts,
+    <span class="fn">ROUND</span>(<span class="fn">SUM</span>(p.amount_paid) - <span class="fn">SUM</span>(t.treatment_cost), <span class="num">0</span>) <span class="kw">AS</span> marge
+<span class="kw">FROM</span> hospital_operations.visits v
+<span class="kw">JOIN</span> hospital_operations.doctors doc  <span class="kw">ON</span> v.doctor_id = doc.doctor_id
+<span class="kw">JOIN</span> hospital_operations.departments d <span class="kw">ON</span> doc.department_id = d.department_id
+<span class="kw">LEFT JOIN</span> hospital_operations.payments p <span class="kw">ON</span> v.visit_id = p.visit_id
+<span class="kw">LEFT JOIN</span> hospital_operations.treatments t <span class="kw">ON</span> v.visit_id = t.visit_id
+<span class="kw">GROUP BY</span> d.department_name
+<span class="kw">ORDER BY</span> marge <span class="kw">DESC</span>;
+
+<span class="cm">-- 6. Paiements en attente &gt; 30 jours (alerte)</span>
+<span class="kw">SELECT</span>
+    p.payment_id,
+    v.visit_date,
+    p.payment_date,
+    p.amount_paid,
+    <span class="fn">DATEDIFF</span>(<span class="fn">CURDATE</span>(), p.payment_date) <span class="kw">AS</span> jours_attente
+<span class="kw">FROM</span> hospital_operations.payments p
+<span class="kw">JOIN</span> hospital_operations.visits v <span class="kw">ON</span> p.visit_id = v.visit_id
+<span class="kw">WHERE</span> p.payment_status = <span class="str">'Pending'</span>
+  <span class="kw">AND</span> <span class="fn">DATEDIFF</span>(<span class="fn">CURDATE</span>(), p.payment_date) > <span class="num">30</span>
+<span class="kw">ORDER BY</span> jours_attente <span class="kw">DESC</span>;`
+  }
+};
+
+const daxCode = {
+  measures: {
+    fname: 'Power BI — Mesures DAX principales',
+    code: `<span class="cm">// ═══ MESURES DAX — Analyse Financière Hôpital ═══</span>
+
+<span class="cm">// 1. Revenus totaux encaissés</span>
+<span class="cl">Total Revenue</span> = 
+    <span class="kw">CALCULATE</span>(
+        <span class="fn">SUM</span>(payments[amount_paid]),
+        payments[payment_status] = <span class="str">"Paid"</span>
+    )
+
+<span class="cm">// 2. Coût total des traitements</span>
+<span class="cl">Total Treatment Cost</span> = 
+    <span class="fn">SUM</span>(treatments[treatment_cost])
+
+<span class="cm">// 3. Marge opérationnelle</span>
+<span class="cl">Operating Margin</span> = 
+    <span class="kw">VAR</span> Revenue = [<span class="cl">Total Revenue</span>]
+    <span class="kw">VAR</span> Cost    = [<span class="cl">Total Treatment Cost</span>]
+    <span class="kw">RETURN</span>
+        <span class="fn">DIVIDE</span>(Revenue - Cost, Revenue, <span class="num">0</span>)
+
+<span class="cm">// 4. Taux d'impayés</span>
+<span class="cl">Unpaid Rate %</span> = 
+    <span class="kw">VAR</span> TotalPayments  = <span class="fn">COUNTROWS</span>(payments)
+    <span class="kw">VAR</span> UnpaidPayments = <span class="kw">CALCULATE</span>(
+                            <span class="fn">COUNTROWS</span>(payments),
+                            payments[payment_status] <> <span class="str">"Paid"</span>
+                         )
+    <span class="kw">RETURN</span>
+        <span class="fn">DIVIDE</span>(UnpaidPayments, TotalPayments, <span class="num">0</span>) * <span class="num">100</span>
+
+<span class="cm">// 5. Coût moyen par visite</span>
+<span class="cl">Avg Cost Per Visit</span> = 
+    <span class="fn">AVERAGEX</span>(
+        visits,
+        <span class="kw">CALCULATE</span>(<span class="fn">SUM</span>(treatments[treatment_cost]))
+    )
+
+<span class="cm">// 6. Nombre de visites actives</span>
+<span class="cl">Total Visits</span> = <span class="fn">DISTINCTCOUNT</span>(visits[visit_id])`
+  },
+  kpis: {
+    fname: 'Power BI — KPIs avec alertes conditionnelles',
+    code: `<span class="cm">// ═══ KPIs AVEC SEUILS D'ALERTE ═══</span>
+
+<span class="cm">// Statut impayés (couleur conditionnelle)</span>
+<span class="cl">Unpaid Status</span> = 
+    <span class="kw">VAR</span> Rate = [<span class="cl">Unpaid Rate %</span>]
+    <span class="kw">RETURN</span>
+        <span class="kw">SWITCH</span>(<span class="kw">TRUE</span>(),
+            Rate > <span class="num">30</span>, <span class="str">"🔴 CRITIQUE"</span>,
+            Rate > <span class="num">15</span>, <span class="str">"🟡 ATTENTION"</span>,
+            <span class="str">"🟢 NORMAL"</span>
+        )
+
+<span class="cm">// Revenus par département</span>
+<span class="cl">Revenue by Dept</span> = 
+    <span class="kw">CALCULATE</span>(
+        <span class="fn">SUM</span>(payments[amount_paid]),
+        payments[payment_status] = <span class="str">"Paid"</span>,
+        <span class="kw">USERELATIONSHIP</span>(visits[visit_id], payments[visit_id])
+    )
+
+<span class="cm">// Charge médecin vs moyenne</span>
+<span class="cl">Doctor Load vs Avg</span> = 
+    <span class="kw">VAR</span> DoctorVisits = <span class="fn">COUNTROWS</span>(visits)
+    <span class="kw">VAR</span> AvgVisits    = <span class="kw">CALCULATE</span>(
+                          <span class="fn">AVERAGEX</span>(<span class="fn">VALUES</span>(doctors[doctor_id]),
+                          <span class="fn">COUNTROWS</span>(visits))
+                       )
+    <span class="kw">RETURN</span>
+        <span class="fn">DIVIDE</span>(DoctorVisits, AvgVisits, <span class="num">1</span>) - <span class="num">1</span>
+
+<span class="cm">// Montant en attente de paiement</span>
+<span class="cl">Pending Amount</span> = 
+    <span class="kw">CALCULATE</span>(
+        <span class="fn">SUM</span>(payments[amount_paid]),
+        payments[payment_status] = <span class="str">"Pending"</span>
+    )
+
+<span class="cm">// Taux de remplissage des consultations</span>
+<span class="cl">Consultation Rate %</span> = 
+    <span class="fn">DIVIDE</span>(
+        <span class="kw">CALCULATE</span>(<span class="fn">COUNTROWS</span>(visits), visits[visit_type] = <span class="str">"Consultation"</span>),
+        [<span class="cl">Total Visits</span>],
+        <span class="num">0</span>
+    ) * <span class="num">100</span>`
+  },
+  time: {
+    fname: 'Power BI — Time Intelligence DAX',
+    code: `<span class="cm">// ═══ TIME INTELLIGENCE ═══</span>
+
+<span class="cm">// Revenus mois précédent (comparaison)</span>
+<span class="cl">Revenue LM</span> = 
+    <span class="kw">CALCULATE</span>(
+        [<span class="cl">Total Revenue</span>],
+        <span class="fn">PREVIOUSMONTH</span>(DateTable[Date])
+    )
+
+<span class="cm">// Croissance MoM (Month over Month)</span>
+<span class="cl">Revenue MoM Growth</span> = 
+    <span class="fn">DIVIDE</span>([<span class="cl">Total Revenue</span>] - [<span class="cl">Revenue LM</span>], [<span class="cl">Revenue LM</span>], <span class="num">0</span>)
+
+<span class="cm">// Cumul depuis début d'année (YTD)</span>
+<span class="cl">Revenue YTD</span> = 
+    <span class="kw">CALCULATE</span>(
+        [<span class="cl">Total Revenue</span>],
+        <span class="fn">DATESYTD</span>(DateTable[Date])
+    )
+
+<span class="cm">// Comparaison année précédente (YoY)</span>
+<span class="cl">Revenue SPLY</span> = 
+    <span class="kw">CALCULATE</span>(
+        [<span class="cl">Total Revenue</span>],
+        <span class="fn">SAMEPERIODLASTYEAR</span>(DateTable[Date])
+    )
+
+<span class="cl">Revenue YoY %</span> = 
+    <span class="fn">DIVIDE</span>([<span class="cl">Total Revenue</span>] - [<span class="cl">Revenue SPLY</span>], [<span class="cl">Revenue SPLY</span>], <span class="num">0</span>)
+
+<span class="cm">// Moyenne mobile 3 mois</span>
+<span class="cl">Revenue 3M Avg</span> = 
+    <span class="kw">CALCULATE</span>(
+        <span class="fn">AVERAGEX</span>(
+            <span class="fn">DATESINPERIOD</span>(DateTable[Date], <span class="fn">LASTDATE</span>(DateTable[Date]), <span class="num">-3</span>, <span class="kw">MONTH</span>),
+            [<span class="cl">Total Revenue</span>]
+        )
+    )
+
+<span class="cm">// Paiements en retard &gt; 30j</span>
+<span class="cl">Overdue Payments</span> = 
+    <span class="kw">CALCULATE</span>(
+        <span class="fn">COUNTROWS</span>(payments),
+        payments[payment_status] = <span class="str">"Pending"</span>,
+        <span class="fn">DATEDIFF</span>(payments[payment_date], <span class="fn">TODAY</span>(), <span class="kw">DAY</span>) > <span class="num">30</span>
+    )`
+  }
+};
+
+// ── Tab switching functions
+function showCode(proj, tab) {
+  const data = autoCode[tab];
+  document.getElementById('auto-fname').textContent = data.fname;
+  document.getElementById('auto-code').innerHTML = `<pre>${data.code}</pre>`;
+  document.querySelectorAll('#auto-tabs .cv-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function showSQL(tab) {
+  const data = sqlCode[tab];
+  document.getElementById('sql-fname').textContent = data.fname;
+  document.getElementById('sql-code').innerHTML = `<pre>${data.code}</pre>`;
+  document.querySelectorAll('#sql-tabs .cv-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function showDAX(tab) {
+  const data = daxCode[tab];
+  document.getElementById('dax-fname').textContent = data.fname;
+  document.getElementById('dax-code').innerHTML = `<pre>${data.code}</pre>`;
+  event.target.closest('.code-viewer').querySelectorAll('.cv-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// ── Init default code displays
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('auto-code').innerHTML = `<pre>${autoCode.gen.code}</pre>`;
+  document.getElementById('sql-code').innerHTML  = `<pre>${sqlCode.schema.code}</pre>`;
+  document.getElementById('dax-code').innerHTML  = `<pre>${daxCode.measures.code}</pre>`;
+});
+</script>
+</body>
+</html>
